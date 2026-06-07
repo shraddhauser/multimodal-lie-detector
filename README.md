@@ -1,30 +1,17 @@
-\# Multimodal Lie Detector
+Multimodal Lie Detector
 
+An AI-powered multimodal behavioral analysis system that combines facial expressions, eye movement patterns, and vocal characteristics to estimate behavioral consistency during human communication.
 
+ Project Overview
 
-A multimodal AI-powered deception detection system that analyzes facial micro-expressions, eye movement patterns, and vocal characteristics to estimate behavioral consistency during human communication.
+The system analyzes multiple behavioral signals simultaneously:
 
+Facial Micro-Expression Analysis
+Eye Tracking & Ocular Behavior Monitoring
+Speech & Vocal Acoustic Analysis
+Multimodal AI Reasoning using Gemini
 
-
-\## Project Overview
-
-
-
-This project combines multiple modalities:
-
-
-
-\- Facial Micro-expression Analysis
-
-\- Eye Tracking \& Ocular Behavior
-
-\- Speech \& Vocal Acoustic Analysis
-
-\- Multimodal Reasoning using Google Gemini
-
-
-
-The system aims to identify inconsistencies between visual and audio cues using modern AI techniques.
+Instead of relying solely on spoken words, the system focuses on behavioral indicators and multimodal signal consistency.
 
 
 
