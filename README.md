@@ -1,20 +1,61 @@
-Multimodal Lie Detector
+# Multimodal Lie Detector
 
 An AI-powered multimodal behavioral analysis system that combines facial expressions, eye movement patterns, and vocal characteristics to estimate behavioral consistency during human communication.
 
- Project Overview
+---
+
+##  Project Overview
 
 The system analyzes multiple behavioral signals simultaneously:
 
-Facial Micro-Expression Analysis
-Eye Tracking & Ocular Behavior Monitoring
-Speech & Vocal Acoustic Analysis
-Multimodal AI Reasoning using Gemini
+* Facial Micro-Expression Analysis
+* Eye Tracking & Ocular Behavior Monitoring
+* Speech & Vocal Acoustic Analysis
+* Multimodal AI Reasoning using Gemini
 
 Instead of relying solely on spoken words, the system focuses on behavioral indicators and multimodal signal consistency.
 
+---
 
-Project Structure
+##  Features
+
+*  Facial micro-expression detection
+*  Eye movement tracking
+*  Speech transcription
+*  Vocal emotion & acoustic analysis
+*  Gemini-powered multimodal reasoning
+*  Behavioral consistency scoring
+*  Detailed analysis reports
+
+---
+
+##  Technology Stack
+
+### Computer Vision
+
+* OpenCV
+* Vision Transformers (ViT)
+
+### Audio Processing
+
+* Whisper ASR
+* Librosa
+
+### AI & Machine Learning
+
+* Google Gemini API
+* PyTorch
+* TensorFlow
+
+### Programming Language
+
+* Python
+
+---
+
+## Project Structure
+
+```text
 multimodal-lie-detector/
 │
 ├── data/
@@ -71,126 +112,72 @@ multimodal-lie-detector/
 ├── .gitignore
 ├── LICENSE
 └── README.md
-\## Features
+```
 
+---
 
+##  System Architecture
 
-\- Real-time face analysis
-
-\- Eye movement tracking
-
-\- Speech transcription
-
-\- Vocal emotion analysis
-
-\- Multimodal fusion
-
-\- Behavioral consistency scoring
-
-
-
-\## Technology Stack
-
-
-
-\### Computer Vision
-
-\- OpenCV
-
-\- Vision Transformers (ViT)
-
-
-
-\### Audio Processing
-
-\- Whisper ASR
-
-\- Librosa
-
-
-
-\### AI Models
-
-\- Google Gemini API
-
-\- PyTorch
-
-\- TensorFlow
-
-
-
-\### Programming Language
-
-\- Python
-
-
-
-\## System Architecture
-
-
-
+```text
 Input Video
-
-↓
-
-Face Detection
-
-↓
-
+      │
+      ▼
+ Face Detection
+      │
+      ▼
 Micro-expression Analysis
-
-↓
-
+      │
+      ▼
 Eye Tracking
-
-↓
-
+      │
+      ▼
 Speech Processing
-
-↓
-
+      │
+      ▼
 Feature Fusion
-
-↓
-
+      │
+      ▼
 Gemini Reasoning
-
-↓
-
+      │
+      ▼
 Behavior Consistency Score
+```
 
+---
 
+##  Future Improvements
 
-\## Future Improvements
+* Live webcam support
+* Advanced emotion recognition
+* Temporal behavior modeling
+* Mobile application deployment
+* Wearable device integration
+* Real-time dashboard analytics
 
+---
 
+##  Achievements
 
-\- Live webcam support
-
-\- Improved emotion recognition
-
-\- Advanced temporal modeling
-
-\- Mobile deployment
-
-
-
-\## Achievements
-
-
-
-🏆 Winner – GDG TechSprint 2025
-
-
+**Winner – GDG TechSprint 2025**
 
 Selected for live demonstration at a Google Developer Group showcase.
 
+---
 
+##  Team Cloud Sprint
 
-\## Authors
+* Shraddha Pardeshi (Team Lead)
+* Syed Fatema Zohra
+* Zaid Ali Syyed
 
+---
 
+##  License
 
-Shraddha Pardeshi
-Syed Fatema Zohra
-Zaid Ali Syyed
+This project is intended for educational and research purposes only.
+
+---
+
+##  Support
+
+If you find this project useful, consider giving it a star on GitHub.
