@@ -14,7 +14,63 @@ Multimodal AI Reasoning using Gemini
 Instead of relying solely on spoken words, the system focuses on behavioral indicators and multimodal signal consistency.
 
 
-
+Project Structure
+multimodal-lie-detector/
+│
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── samples/
+│
+├── models/
+│   ├── face_model/
+│   ├── eye_tracking_model/
+│   ├── voice_model/
+│   └── fusion_model/
+│
+├── src/
+│   ├── face_analysis/
+│   │   ├── micro_expression.py
+│   │   └── face_detector.py
+│   │
+│   ├── eye_tracking/
+│   │   ├── eye_tracker.py
+│   │   └── pupil_analysis.py
+│   │
+│   ├── audio_analysis/
+│   │   ├── speech_to_text.py
+│   │   ├── emotion_analysis.py
+│   │   └── acoustic_features.py
+│   │
+│   ├── fusion/
+│   │   └── multimodal_fusion.py
+│   │
+│   ├── gemini/
+│   │   └── gemini_reasoning.py
+│   │
+│   └── main.py
+│
+├── notebooks/
+│   └── experiments.ipynb
+│
+├── reports/
+│   ├── screenshots/
+│   └── outputs/
+│
+├── docs/
+│   ├── architecture.png
+│   ├── workflow.png
+│   └── project_report.pdf
+│
+├── tests/
+│   ├── test_face.py
+│   ├── test_audio.py
+│   └── test_fusion.py
+│
+├── requirements.txt
+├── .gitignore
+├── LICENSE
+└── README.md
 \## Features
 
 
