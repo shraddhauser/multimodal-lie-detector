@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 \# Multimodal Lie Detector
 
 
@@ -150,3 +151,7 @@ Selected for live demonstration at a Google Developer Group showcase.
 
 Shraddha Pardeshi
 
+=======
+# multimodal-lie-detector
+GDG TechSprint 2025 winning project leveraging Vision Transformers, Whisper ASR, and Gemini AI for multimodal deception detection.
+>>>>>>> dbdddbae9786df48bd70000809c4653deb254fb9
