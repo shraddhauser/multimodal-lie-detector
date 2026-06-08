@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload - Multimodal Lie Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/upload.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">🔍</span>
+                <span class="logo-text">Multimodal Lie Detector</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/upload" class="active btn-primary">Start Analysis</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="upload-container">
+        <div class="container">
+            <h1>Upload Your Media</h1>
+            <p class="subtitle">Upload a video or audio file for behavioral analysis</p>
+
+            <div class="upload-section">
+                <!-- Video Upload -->
+                <div class="upload-card">
+                    <div class="card-header">
+                        <h2>📹 Video Upload</h2>
+                        <p>Analyze facial expressions and eye movements</p>
+                    </div>
+                    <div class="upload-area" id="videoUploadArea">
+                        <div class="upload-icon">🎥</div>
+                        <h3>Drag and drop your video here</h3>
+                        <p>or click to select a file</p>
+                        <input type="file" id="videoInput" class="file-input" accept="video/*" hidden>
+                    </div>
+                    <div class="file-info" id="videoInfo" style="display: none;">
+                        <p id="videoFileName"></p>
+                        <button class="btn btn-secondary" onclick="clearVideoUpload()">Clear</button>
+                    </div>
+                    <div class="file-formats">
+                        <p><strong>Supported formats:</strong> MP4, AVI, MOV, MKV, FLV, WMV</p>
+                        <p><strong>Max size:</strong> 500 MB</p>
+                    </div>
+                </div>
+
+                <!-- Audio Upload -->
+                <div class="upload-card">
+                    <div class="card-header">
+                        <h2>🎙️ Audio Upload</h2>
+                        <p>Analyze speech patterns and emotions (Optional)</p>
+                    </div>
+                    <div class="upload-area" id="audioUploadArea">
+                        <div class="upload-icon">🎵</div>
+                        <h3>Drag and drop your audio here</h3>
+                        <p>or click to select a file</p>
+                        <input type="file" id="audioInput" class="file-input" accept="audio/*" hidden>
+                    </div>
+                    <div class="file-info" id="audioInfo" style="display: none;">
+                        <p id="audioFileName"></p>
+                        <button class="btn btn-secondary" onclick="clearAudioUpload()">Clear</button>
+                    </div>
+                    <div class="file-formats">
+                        <p><strong>Supported formats:</strong> MP3, WAV, M4A, FLAC, AAC</p>
+                        <p><strong>Max size:</strong> 500 MB</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analysis Options -->
+            <div class="analysis-options">
+                <h3>Analysis Options</h3>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="advancedAnalysis" checked>
+                    <span>Enable Advanced AI Analysis</span>
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="detailedReport" checked>
+                    <span>Generate Detailed Report</span>
+                </label>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="action-buttons">
+                <button class="btn btn-large" id="analyzeBtn" onclick="startAnalysis()" disabled>
+                    Analyze
+                </button>
+            </div>
+
+            <!-- Progress Section -->
+            <div class="progress-section" id="progressSection" style="display: none;">
+                <div class="spinner"></div>
+                <p id="progressText">Processing your media...</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <!-- Error Alert -->
+            <div class="alert alert-error" id="errorAlert" style="display: none;">
+                <p id="errorMessage"></p>
+            </div>
+
+            <!-- Success Alert -->
+            <div class="alert alert-success" id="successAlert" style="display: none;">
+                <p id="successMessage"></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Multimodal Lie Detector. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+</body>
+</html>

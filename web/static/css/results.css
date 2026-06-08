@@ -1,0 +1,213 @@
+/* ============================================
+   Results Page Styles
+   ============================================ */
+
+.results-container {
+    min-height: 100vh;
+    padding: 3rem 0;
+}
+
+.results-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, #6366f1, #10b981);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Result Cards */
+.result-card {
+    background: linear-gradient(135deg, #1e293b, #334155);
+    border: 1px solid #475569;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+}
+
+.result-card:hover {
+    border-color: #6366f1;
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+}
+
+.result-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #f1f5f9;
+}
+
+.result-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    color: #f1f5f9;
+}
+
+/* Summary Card */
+.summary-card {
+    text-align: center;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(16, 185, 129, 0.1));
+    border: 2px solid #6366f1;
+}
+
+.score-circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6366f1, #10b981);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem auto;
+    box-shadow: 0 10px 40px rgba(99, 102, 241, 0.3);
+}
+
+.score-value {
+    font-size: 3rem;
+    font-weight: 800;
+    color: white;
+}
+
+.score-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.assessment-text {
+    font-size: 1.1rem;
+    color: #cbd5e1;
+    margin: 1rem 0;
+}
+
+/* Results Grid */
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.analysis-results {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(99, 102, 241, 0.05);
+    border-radius: 8px;
+    border-left: 4px solid #6366f1;
+}
+
+.result-item .label {
+    color: #cbd5e1;
+    font-weight: 600;
+}
+
+.result-item .value {
+    color: #10b981;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* Chart Container */
+.chart-container {
+    position: relative;
+    height: 300px;
+    margin-top: 1rem;
+}
+
+/* Evidence List */
+.evidence-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.evidence-item {
+    padding: 1rem;
+    background: rgba(16, 185, 129, 0.05);
+    border-left: 4px solid #10b981;
+    border-radius: 8px;
+    color: #cbd5e1;
+}
+
+.evidence-item strong {
+    color: #10b981;
+}
+
+.loading-text {
+    text-align: center;
+    color: #94a3b8;
+    padding: 2rem;
+}
+
+/* Recommendations List */
+.recommendations-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.recommendation-item {
+    padding: 1rem;
+    background: rgba(99, 102, 241, 0.05);
+    border-left: 4px solid #6366f1;
+    border-radius: 8px;
+    color: #cbd5e1;
+}
+
+.recommendation-item strong {
+    color: #6366f1;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+}
+
+.action-buttons .btn {
+    min-width: 200px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .results-container {
+        padding: 1rem 0;
+    }
+
+    .results-container h1 {
+        font-size: 1.8rem;
+    }
+
+    .score-circle {
+        width: 150px;
+        height: 150px;
+    }
+
+    .score-value {
+        font-size: 2rem;
+    }
+
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .action-buttons .btn {
+        width: 100%;
+    }
+}

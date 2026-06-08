@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Multimodal Lie Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">🔍</span>
+                <span class="logo-text">Multimodal Lie Detector</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about" class="active">About</a></li>
+                <li><a href="/upload" class="btn-primary">Start Analysis</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="about-container">
+        <div class="container">
+            <h1>About Multimodal Lie Detector</h1>
+
+            <!-- Overview Section -->
+            <section class="about-section">
+                <h2>Project Overview</h2>
+                <p>
+                    The Multimodal Lie Detector is an advanced AI-powered behavioral analysis system that combines 
+                    multiple modalities to assess behavioral consistency and detect potential deception indicators.
+                </p>
+                <p>
+                    Instead of relying on a single modality, our system synthesizes insights from facial expressions, 
+                    eye movements, speech patterns, and acoustic characteristics to provide a comprehensive analysis.
+                </p>
+            </section>
+
+            <!-- Technology Stack -->
+            <section class="about-section">
+                <h2>Technology Stack</h2>
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <h3>Computer Vision</h3>
+                        <ul>
+                            <li>OpenCV</li>
+                            <li>Vision Transformers</li>
+                            <li>Facial Recognition</li>
+                        </ul>
+                    </div>
+                    <div class="tech-card">
+                        <h3>Audio Processing</h3>
+                        <ul>
+                            <li>Whisper ASR</li>
+                            <li>Librosa</li>
+                            <li>Emotion Detection</li>
+                        </ul>
+                    </div>
+                    <div class="tech-card">
+                        <h3>AI & ML</h3>
+                        <ul>
+                            <li>TensorFlow</li>
+                            <li>PyTorch</li>
+                            <li>Google Gemini</li>
+                        </ul>
+                    </div>
+                    <div class="tech-card">
+                        <h3>Web Framework</h3>
+                        <ul>
+                            <li>Flask</li>
+                            <li>JavaScript</li>
+                            <li>HTML/CSS</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How It Works -->
+            <section class="about-section">
+                <h2>How It Works</h2>
+                <div class="process-steps">
+                    <div class="step">
+                        <div class="step-circle">1</div>
+                        <h3>Video/Audio Input</h3>
+                        <p>Upload your media files for analysis</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-circle">2</div>
+                        <h3>Face Detection</h3>
+                        <p>Identify and track facial features and expressions</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-circle">3</div>
+                        <h3>Eye Tracking</h3>
+                        <p>Monitor gaze patterns and pupil characteristics</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-circle">4</div>
+                        <h3>Audio Analysis</h3>
+                        <p>Transcribe and analyze speech patterns and emotions</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-circle">5</div>
+                        <h3>Feature Extraction</h3>
+                        <p>Extract acoustic and behavioral features</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-circle">6</div>
+                        <h3>Multimodal Fusion</h3>
+                        <p>Combine features from all modalities</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-circle">7</div>
+                        <h3>AI Analysis</h3>
+                        <p>Apply machine learning models for assessment</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-circle">8</div>
+                        <h3>Report Generation</h3>
+                        <p>Create comprehensive analysis report</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Features -->
+            <section class="about-section">
+                <h2>Key Features</h2>
+                <div class="features-list">
+                    <div class="feature">
+                        <h3>👁️ Advanced Face Analysis</h3>
+                        <p>Detects micro-expressions, face movements, and subtle facial cues that may indicate deception</p>
+                    </div>
+                    <div class="feature">
+                        <h3>🔍 Eye Movement Tracking</h3>
+                        <p>Monitors gaze patterns, pupil dilation, blink rates, and fixation duration</p>
+                    </div>
+                    <div class="feature">
+                        <h3>🎵 Audio Pattern Analysis</h3>
+                        <p>Analyzes pitch variations, speech rate, pauses, and emotional tone</p>
+                    </div>
+                    <div class="feature">
+                        <h3>🧠 AI-Powered Reasoning</h3>
+                        <p>Uses Google Gemini for advanced multi-step reasoning on multimodal data</p>
+                    </div>
+                    <div class="feature">
+                        <h3>📊 Comprehensive Reporting</h3>
+                        <p>Generates detailed analysis reports with visualizations and recommendations</p>
+                    </div>
+                    <div class="feature">
+                        <h3>🔐 Privacy Focused</h3>
+                        <p>Secure processing with automatic deletion of uploaded files after analysis</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Disclaimer -->
+            <section class="about-section disclaimer">
+                <h2>Important Disclaimer</h2>
+                <p>
+                    This system is designed for <strong>research and analytical purposes only</strong>. 
+                    The analysis results should not be used as the sole basis for critical decisions. 
+                    Behavioral analysis is complex and influenced by many factors.
+                </p>
+                <p>
+                    Results should be interpreted by qualified professionals in conjunction with 
+                    other evidence and investigative methods.
+                </p>
+            </section>
+
+            <!-- Contact -->
+            <section class="about-section">
+                <h2>Contact & Support</h2>
+                <p>For questions or support, please visit our GitHub repository:</p>
+                <a href="https://github.com/shraddhauser/multimodal-lie-detector" class="btn btn-primary">
+                    View on GitHub
+                </a>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Multimodal Lie Detector. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

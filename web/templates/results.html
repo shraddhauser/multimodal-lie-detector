@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results - Multimodal Lie Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/results.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">🔍</span>
+                <span class="logo-text">Multimodal Lie Detector</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/upload" class="btn-primary">New Analysis</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Results Container -->
+    <main class="results-container">
+        <div class="container">
+            <h1>Analysis Results</h1>
+
+            <!-- Summary Card -->
+            <div class="result-card summary-card">
+                <h2>Overall Assessment</h2>
+                <div class="score-circle">
+                    <div class="score-value" id="scoreValue">--</div>
+                    <div class="score-label">Deception Score</div>
+                </div>
+                <p id="overallAssessment" class="assessment-text">Awaiting analysis...</p>
+            </div>
+
+            <!-- Detailed Results -->
+            <div class="results-grid">
+                <!-- Facial Analysis -->
+                <div class="result-card">
+                    <h3>😊 Facial Analysis</h3>
+                    <div class="analysis-results">
+                        <div class="result-item">
+                            <span class="label">Micro Expressions:</span>
+                            <span class="value" id="microExpressions">--</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">Expression Consistency:</span>
+                            <span class="value" id="expressionConsistency">--</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">Detected Emotions:</span>
+                            <span class="value" id="detectedEmotions">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Eye Analysis -->
+                <div class="result-card">
+                    <h3>👁️ Eye Tracking</h3>
+                    <div class="analysis-results">
+                        <div class="result-item">
+                            <span class="label">Gaze Pattern:</span>
+                            <span class="value" id="gazePattern">--</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">Pupil Dilation:</span>
+                            <span class="value" id="pupilDilation">--</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">Blink Rate:</span>
+                            <span class="value" id="blinkRate">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Audio Analysis -->
+                <div class="result-card">
+                    <h3>🎙️ Audio Analysis</h3>
+                    <div class="analysis-results">
+                        <div class="result-item">
+                            <span class="label">Speech Emotion:</span>
+                            <span class="value" id="speechEmotion">--</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">Pitch Variation:</span>
+                            <span class="value" id="pitchVariation">--</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">Pause Patterns:</span>
+                            <span class="value" id="pausePatterns">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Behavioral Consistency -->
+                <div class="result-card">
+                    <h3>🧠 Behavioral Consistency</h3>
+                    <div class="analysis-results">
+                        <div class="result-item">
+                            <span class="label">Multimodal Alignment:</span>
+                            <span class="value" id="multimodalAlignment">--</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">Cognitive Load:</span>
+                            <span class="value" id="cognitiveLoad">--</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">Behavioral Score:</span>
+                            <span class="value" id="behavioralScore">--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline Chart -->
+            <div class="result-card">
+                <h3>Analysis Timeline</h3>
+                <div class="chart-container">
+                    <canvas id="timelineChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Evidence Summary -->
+            <div class="result-card">
+                <h3>Key Evidence</h3>
+                <div class="evidence-list" id="evidenceList">
+                    <p class="loading-text">Loading evidence...</p>
+                </div>
+            </div>
+
+            <!-- Recommendations -->
+            <div class="result-card">
+                <h3>Recommendations</h3>
+                <div class="recommendations-list" id="recommendationsList">
+                    <p class="loading-text">Generating recommendations...</p>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="downloadReport()">Download Report</button>
+                <button class="btn btn-secondary" onclick="startNewAnalysis()">New Analysis</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Multimodal Lie Detector. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/results.js') }}"></script>
+</body>
+</html>
