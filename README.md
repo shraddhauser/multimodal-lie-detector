@@ -138,7 +138,6 @@ Gemini Reasoning
 Behavior Consistency Score
 ```
 
----
 
 ##  Future Improvements
 
@@ -149,7 +148,6 @@ Behavior Consistency Score
 * Wearable device integration
 * Real-time dashboard analytics
 
----
 
 ##  Achievements
 
@@ -157,7 +155,6 @@ Behavior Consistency Score
 
 Selected for live demonstration at a Google Developer Group showcase.
 
----
 
 ##  Team Cloud Sprint
 
@@ -165,13 +162,11 @@ Selected for live demonstration at a Google Developer Group showcase.
 * Syed Fatema Zohra
 * Zaid Ali Syyed
 
----
 
 ##  License
 
 This project is intended for educational and research purposes only.
 
----
 
 ##  Support
 
