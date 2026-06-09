@@ -2,7 +2,6 @@
 
 An AI-powered multimodal behavioral analysis system that combines facial expressions, eye movement patterns, and vocal characteristics to estimate behavioral consistency during human communication.
 
----
 
 ##  Project Overview
 
@@ -15,8 +14,6 @@ The system analyzes multiple behavioral signals simultaneously:
 
 Instead of relying solely on spoken words, the system focuses on behavioral indicators and multimodal signal consistency.
 
----
-
 ##  Features
 
 *  Facial micro-expression detection
@@ -27,7 +24,6 @@ Instead of relying solely on spoken words, the system focuses on behavioral indi
 *  Behavioral consistency scoring
 *  Detailed analysis reports
 
----
 
 ##  Technology Stack
 
@@ -51,7 +47,6 @@ Instead of relying solely on spoken words, the system focuses on behavioral indi
 
 * Python
 
----
 
 ## Project Structure
 
