@@ -8,60 +8,44 @@
 }
 
 .results-container h1 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
     text-align: center;
-    background: linear-gradient(135deg, #6366f1, #10b981);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--text-primary);
 }
 
 /* Result Cards */
-.result-card {
-    background: linear-gradient(135deg, #1e293b, #334155);
-    border: 1px solid #475569;
-    border-radius: 12px;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    transition: all 0.3s ease;
-}
-
-.result-card:hover {
-    border-color: #6366f1;
-    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
-}
-
+/* Consolidated below using theme variables */
 .result-card h2 {
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
-    color: #f1f5f9;
+    color: var(--text-primary);
 }
 
 .result-card h3 {
     font-size: 1.3rem;
     margin-bottom: 1.5rem;
-    color: #f1f5f9;
+    color: var(--text-primary);
 }
 
 /* Summary Card */
 .summary-card {
     text-align: center;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(16, 185, 129, 0.1));
-    border: 2px solid #6366f1;
+    background: rgba(255,255,255,0.02);
+    border: 2px solid var(--primary-color);
 }
 
 .score-circle {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #6366f1, #10b981);
+    background: var(--primary-color);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 2rem auto;
-    box-shadow: 0 10px 40px rgba(99, 102, 241, 0.3);
+    margin: 1.5rem auto;
+    box-shadow: var(--shadow-lg);
 }
 
 .score-value {
@@ -77,22 +61,22 @@
 
 .assessment-text {
     font-size: 1.1rem;
-    color: #cbd5e1;
+    color: var(--text-secondary);
     margin: 1rem 0;
 }
 
 /* Results Grid */
-.results-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
+.result-card {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.2s ease;
 }
-
-.analysis-results {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+.result-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow);
 }
 
 .result-item {
@@ -100,20 +84,20 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background: rgba(99, 102, 241, 0.05);
+    background: rgba(255,255,255,0.02);
     border-radius: 8px;
-    border-left: 4px solid #6366f1;
+    border-left: 4px solid var(--primary-color);
 }
 
 .result-item .label {
-    color: #cbd5e1;
+    color: var(--text-secondary);
     font-weight: 600;
 }
 
 .result-item .value {
-    color: #10b981;
+    color: var(--secondary-color);
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
 }
 
 /* Chart Container */
@@ -132,19 +116,19 @@
 
 .evidence-item {
     padding: 1rem;
-    background: rgba(16, 185, 129, 0.05);
-    border-left: 4px solid #10b981;
+    background: rgba(255,255,255,0.02);
+    border-left: 4px solid var(--secondary-color);
     border-radius: 8px;
-    color: #cbd5e1;
+    color: var(--text-secondary);
 }
 
 .evidence-item strong {
-    color: #10b981;
+    color: var(--secondary-color);
 }
 
 .loading-text {
     text-align: center;
-    color: #94a3b8;
+    color: var(--text-secondary);
     padding: 2rem;
 }
 
@@ -157,14 +141,14 @@
 
 .recommendation-item {
     padding: 1rem;
-    background: rgba(99, 102, 241, 0.05);
-    border-left: 4px solid #6366f1;
+    background: rgba(255,255,255,0.02);
+    border-left: 4px solid var(--primary-color);
     border-radius: 8px;
-    color: #cbd5e1;
+    color: var(--text-secondary);
 }
 
 .recommendation-item strong {
-    color: #6366f1;
+    color: var(--primary-color);
 }
 
 /* Action Buttons */

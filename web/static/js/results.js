@@ -88,6 +88,22 @@ function initializeChart() {
     const ctx = document.getElementById('timelineChart');
     if (!ctx) return;
 
+    // Read theme colors from CSS variables
+    const css = getComputedStyle(document.documentElement);
+    const primary = css.getPropertyValue('--primary-color').trim() || '#6366f1';
+    const primaryDark = css.getPropertyValue('--primary-dark').trim() || '#4f46e5';
+    const secondary = css.getPropertyValue('--secondary-color').trim() || '#10b981';
+
+    function hexToRgba(hex, alpha) {
+        if (!hex) return `rgba(255,255,255,${alpha})`;
+        const h = hex.replace('#', '').trim();
+        const bigint = parseInt(h.length === 3 ? h.split('').map(c=>c+c).join('') : h, 16);
+        const r = (bigint >> 16) & 255;
+        const g = (bigint >> 8) & 255;
+        const b = bigint & 255;
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+
     new Chart(ctx, {
         type: 'line',
         data: {
@@ -96,8 +112,8 @@ function initializeChart() {
                 {
                     label: 'Deception Score',
                     data: [0.3, 0.4, 0.65, 0.7, 0.65, 0.6, 0.55],
-                    borderColor: '#6366f1',
-                    backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                    borderColor: primary,
+                    backgroundColor: hexToRgba(primary, 0.12),
                     borderWidth: 2,
                     fill: true,
                     tension: 0.4
@@ -105,8 +121,8 @@ function initializeChart() {
                 {
                     label: 'Cognitive Load',
                     data: [0.4, 0.5, 0.75, 0.8, 0.7, 0.6, 0.5],
-                    borderColor: '#f59e0b',
-                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    borderColor: primaryDark,
+                    backgroundColor: hexToRgba(primaryDark, 0.12),
                     borderWidth: 2,
                     fill: true,
                     tension: 0.4
@@ -114,8 +130,8 @@ function initializeChart() {
                 {
                     label: 'Consistency Score',
                     data: [0.8, 0.75, 0.65, 0.6, 0.65, 0.7, 0.75],
-                    borderColor: '#10b981',
-                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    borderColor: secondary,
+                    backgroundColor: hexToRgba(secondary, 0.12),
                     borderWidth: 2,
                     fill: true,
                     tension: 0.4
@@ -129,7 +145,7 @@ function initializeChart() {
                 legend: {
                     display: true,
                     labels: {
-                        color: '#cbd5e1'
+                        color: css.getPropertyValue('--text-secondary').trim() || '#cbd5e1'
                     }
                 }
             },
@@ -138,18 +154,18 @@ function initializeChart() {
                     beginAtZero: true,
                     max: 1,
                     grid: {
-                        color: '#334155'
+                        color: css.getPropertyValue('--surface-light').trim() || '#334155'
                     },
                     ticks: {
-                        color: '#cbd5e1'
+                        color: css.getPropertyValue('--text-secondary').trim() || '#cbd5e1'
                     }
                 },
                 x: {
                     grid: {
-                        color: '#334155'
+                        color: css.getPropertyValue('--surface-light').trim() || '#334155'
                     },
                     ticks: {
-                        color: '#cbd5e1'
+                        color: css.getPropertyValue('--text-secondary').trim() || '#cbd5e1'
                     }
                 }
             }

@@ -9,22 +9,23 @@
 }
 
 :root {
-    --primary-color: #6366f1;
-    --primary-dark: #4f46e5;
-    --secondary-color: #10b981;
+    /* Valorant-inspired palette, simplified for a plainer UI */
+    --primary-color: #FF4655; /* Valorant red */
+    --primary-dark: #C42B3A;
+    --secondary-color: #FFFFFF; /* light accent */
     --danger-color: #ef4444;
     --warning-color: #f59e0b;
-    --background: #0f172a;
-    --surface: #1e293b;
-    --surface-light: #334155;
-    --text-primary: #f1f5f9;
-    --text-secondary: #cbd5e1;
-    --border-color: #475569;
+    --background: #0B0B0B; /* near-black background */
+    --surface: #121214; /* dark surface */
+    --surface-light: #1a1a1a;
+    --text-primary: #FFFFFF;
+    --text-secondary: #BFC3C7;
+    --border-color: #262626;
     --success-color: #10b981;
     --error-color: #ef4444;
-    --radius: 12px;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.4);
+    --radius: 10px;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.7);
 }
 
 html {
