@@ -49,6 +49,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+# Local virtualenv variant
+.venv-1/
 
 # IDE
 .vscode/
