@@ -2,6 +2,8 @@
 
 An AI-powered multimodal behavioral analysis system that combines facial expressions, eye movement patterns, and vocal characteristics to estimate behavioral consistency during human communication.
 
+we call it Don't Lie Here - we will predict 
+
 
 ##  Project Overview
 
