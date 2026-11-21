@@ -33,23 +33,56 @@ Instead of relying solely on spoken words, the system focuses on behavioral indi
 
 ### Computer Vision
 
-* OpenCV
-* Vision Transformers (ViT)
+* OpenCV (Haar cascade face detection)
+* MediaPipe Face Mesh (blink / EAR, gaze aversion, head movement)
 
 ### Audio Processing
 
-* Whisper ASR
-* Librosa
+* Librosa (pitch, jitter, shimmer, pause analysis)
+* Whisper ASR (optional, offline transcription)
 
-### AI & Machine Learning
+### Fusion & Reasoning
 
-* Google Gemini API
-* PyTorch
-* TensorFlow
+* Per-speaker baseline z-score fusion (NumPy / SciPy)
+* Google Gemini API (optional natural-language summary)
 
-### Programming Language
+### Web
 
-* Python
+* Flask
+
+---
+
+##  Getting Started
+
+```bash
+python -m venv .venv
+.venv\Scriptsctivate        # Windows  (source .venv/bin/activate on macOS/Linux)
+pip install -r requirements.txt
+cp .env.example .env           # optionally set GEMINI_API_KEY and SECRET_KEY
+```
+
+Run the web app:
+
+```bash
+python web/app.py              # http://localhost:5000
+```
+
+Optional extras:
+
+* `pip install openai-whisper` for speech transcription
+* `pip install "mediapipe<0.10.30"` for full Face Mesh landmarks (needs numpy<2); otherwise the Haar cascade fallback is used
+
+Without a Gemini API key the pipeline still runs; only the AI summary is skipped.
+
+---
+
+##  Running Tests
+
+```bash
+pytest
+```
+
+The suite uses synthetic fixtures only (no real data, network or GPU). Tests marked `slow` or `requires_weights` are skipped by default; run them with `pytest -m slow` or `pytest -m requires_weights`.
 
 ---
 
@@ -104,11 +137,21 @@ multimodal-lie-detector/
 │   └── project_report.pdf
 │
 ├── tests/
+│   ├── conftest.py
 │   ├── test_face.py
 │   ├── test_audio.py
-│   └── test_fusion.py
+│   ├── test_fusion.py
+│   ├── test_gemini.py
+│   └── test_web.py
+│
+├── web/
+│   ├── app.py
+│   ├── templates/
+│   └── static/
 │
 ├── requirements.txt
+├── pytest.ini
+├── .env.example
 ├── .gitignore
 ├── LICENSE
 └── README.md
