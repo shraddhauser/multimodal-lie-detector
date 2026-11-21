@@ -8,7 +8,10 @@ scikit-learn>=1.0.0
 librosa>=0.9.0
 soundfile>=0.12.0
 
-# Face mesh
+# Face mesh — the legacy Face Mesh API (mp.solutions) was removed in newer
+# MediaPipe releases. Without it the detector falls back to OpenCV Haar
+# cascades. For full landmark-based blink/gaze features install
+# mediapipe<0.10.30 (requires numpy<2).
 mediapipe>=0.10.0
 
 # AI reasoning (optional)

@@ -8,7 +8,9 @@ import numpy as np
 
 try:
     import mediapipe as mp
-    MEDIAPIPE_AVAILABLE = True
+    # Newer MediaPipe releases removed the legacy `solutions` API; treat that
+    # as "unavailable" so we fall back to the Haar cascade instead of crashing.
+    MEDIAPIPE_AVAILABLE = hasattr(mp, 'solutions') and hasattr(mp.solutions, 'face_mesh')
 except ImportError:
     MEDIAPIPE_AVAILABLE = False
 
