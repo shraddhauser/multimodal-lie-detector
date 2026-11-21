@@ -77,3 +77,7 @@ reports/screenshots/*
 # OS
 .DS_Store
 Thumbs.db
+
+# Uploads (never commit user uploads)
+web/uploads/*
+!web/uploads/.gitkeep
