@@ -1,6 +1,6 @@
 ![Multimodal Signal Analysis](docs/images/banner.svg)
 
-![Python 3.11](https://img.shields.io/badge/python-3.11-blue) ![License: MIT](https://img.shields.io/badge/license-MIT-green)
+[![CI](https://github.com/shraddhauser/multimodal-lie-detector/actions/workflows/ci.yml/badge.svg)](https://github.com/shraddhauser/multimodal-lie-detector/actions/workflows/ci.yml) ![Python 3.11](https://img.shields.io/badge/python-3.11-blue) ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
 A research prototype that measures how a speaker's **blink rate, gaze, head movement and voice** change relative to **their own baseline** in a recording. It was built by team Cloud Sprint for **GDG TechSprint (3rd Prize)** and has since been rebuilt so that every number it shows is actually computed. It produces a signal-consistency report, **not a lie/truth verdict**. Headline result: on synthetic audio, the pipeline recovers a 220 Hz → 330 Hz pitch shift after the baseline period (source: `tests/unit/test_pipeline.py`, run with `pytest`). It has not been evaluated on real recordings.
 
