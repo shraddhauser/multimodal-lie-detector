@@ -91,6 +91,14 @@ function renderChart(dev) {
     const signals = dev.available_signals || [];
     if (!ctx || typeof Chart === 'undefined' || signals.length === 0) return;
 
+    // Theme colors come from the CSS variables in style.css
+    const css = getComputedStyle(document.documentElement);
+    const themeColor = (name, fallback) => css.getPropertyValue(name).trim() || fallback;
+    const positive = themeColor('--primary-color', '#FF4655');
+    const negative = themeColor('--text-secondary', '#BFC3C7');
+    const grid = themeColor('--surface-light', '#1a1a1a');
+    const text = themeColor('--text-secondary', '#BFC3C7');
+
     const values = signals.map((k) => dev.per_signal[k]);
     new Chart(ctx, {
         type: 'bar',
@@ -99,7 +107,7 @@ function renderChart(dev) {
             datasets: [{
                 label: 'Deviation from baseline',
                 data: values,
-                backgroundColor: values.map((v) => (v >= 0 ? 'rgba(244, 114, 182, 0.7)' : 'rgba(99, 102, 241, 0.7)')),
+                backgroundColor: values.map((v) => (v >= 0 ? positive : negative)),
                 borderWidth: 0,
             }],
         },
@@ -109,8 +117,8 @@ function renderChart(dev) {
             maintainAspectRatio: false,
             plugins: { legend: { display: false } },
             scales: {
-                x: { grid: { color: '#334155' }, ticks: { color: '#cbd5e1' } },
-                y: { grid: { color: '#334155' }, ticks: { color: '#cbd5e1' } },
+                x: { grid: { color: grid }, ticks: { color: text } },
+                y: { grid: { color: grid }, ticks: { color: text } },
             },
         },
     });

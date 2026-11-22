@@ -11,10 +11,7 @@
     font-size: 2.5rem;
     margin-bottom: 3rem;
     text-align: center;
-    background: linear-gradient(135deg, #6366f1, #10b981);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--text-primary);
 }
 
 .about-section {
@@ -24,14 +21,14 @@
 .about-section h2 {
     font-size: 2rem;
     margin-bottom: 1.5rem;
-    color: #f1f5f9;
-    border-bottom: 2px solid #6366f1;
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--primary-color);
     padding-bottom: 1rem;
 }
 
 .about-section p {
     font-size: 1.1rem;
-    color: #cbd5e1;
+    color: var(--text-secondary);
     line-height: 1.8;
     margin-bottom: 1rem;
 }
@@ -45,23 +42,23 @@
 }
 
 .tech-card {
-    background: linear-gradient(135deg, #1e293b, #334155);
-    border: 1px solid #475569;
-    border-radius: 12px;
-    padding: 2rem;
-    transition: all 0.3s ease;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: all 0.2s ease;
 }
 
 .tech-card:hover {
-    border-color: #6366f1;
-    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
-    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow);
+    transform: translateY(-4px);
 }
 
 .tech-card h3 {
     font-size: 1.3rem;
     margin-bottom: 1rem;
-    color: #6366f1;
+    color: var(--primary-color);
 }
 
 .tech-card ul {
@@ -72,14 +69,14 @@
 }
 
 .tech-card li {
-    color: #cbd5e1;
+    color: var(--text-secondary);
     padding-left: 1.5rem;
     position: relative;
 }
 
 .tech-card li:before {
     content: "▸";
-    color: #10b981;
+    color: var(--secondary-color);
     position: absolute;
     left: 0;
 }
@@ -96,15 +93,15 @@
     text-align: center;
     position: relative;
     padding: 2rem;
-    background: linear-gradient(135deg, #1e293b, #334155);
-    border: 1px solid #475569;
-    border-radius: 12px;
-    transition: all 0.3s ease;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    transition: all 0.2s ease;
 }
 
 .step:hover {
-    border-color: #6366f1;
-    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    transform: translateY(-4px);
 }
 
 .step-circle {
@@ -113,23 +110,23 @@
     justify-content: center;
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #6366f1, #10b981);
+    background: var(--primary-color);
     border-radius: 50%;
     color: white;
     font-size: 1.5rem;
     font-weight: 700;
     margin: 0 auto 1rem;
-    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+    box-shadow: var(--shadow);
 }
 
 .step h3 {
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
-    color: #f1f5f9;
+    color: var(--text-primary);
 }
 
 .step p {
-    color: #cbd5e1;
+    color: var(--text-secondary);
     font-size: 0.95rem;
 }
 
@@ -142,44 +139,44 @@
 }
 
 .feature {
-    background: linear-gradient(135deg, #1e293b, #334155);
-    border: 1px solid #475569;
-    border-radius: 12px;
-    padding: 2rem;
-    transition: all 0.3s ease;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: all 0.2s ease;
 }
 
 .feature:hover {
-    border-color: #6366f1;
-    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
-    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow);
+    transform: translateY(-4px);
 }
 
 .feature h3 {
     font-size: 1.2rem;
     margin-bottom: 1rem;
-    color: #f1f5f9;
+    color: var(--text-primary);
 }
 
 .feature p {
-    color: #cbd5e1;
+    color: var(--text-secondary);
     font-size: 0.95rem;
     line-height: 1.6;
 }
 
 /* Disclaimer */
 .disclaimer {
-    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(245, 158, 11, 0.1));
-    border: 2px solid #f59e0b;
+    background: rgba(255,255,255,0.02);
+    border: 2px solid var(--warning-color);
     border-radius: 12px;
 }
 
 .disclaimer p {
-    color: #fca5a5;
+    color: var(--error-color);
 }
 
 .disclaimer strong {
-    color: #fecaca;
+    color: rgba(255, 200, 200, 0.9);
 }
 
 /* Responsive */
