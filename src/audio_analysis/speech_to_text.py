@@ -24,6 +24,11 @@ class SpeechToTextConverter:
         self.confidence_threshold = 0.5
         self._model = None
 
+    @property
+    def available(self):
+        """True when openai-whisper is installed."""
+        return WHISPER_AVAILABLE
+
     def _load_model(self):
         if self._model is None and WHISPER_AVAILABLE:
             self._model = openai_whisper.load_model(self.model_name)
@@ -39,12 +44,12 @@ class SpeechToTextConverter:
             dict with 'text' and 'confidence'.
         """
         if not WHISPER_AVAILABLE:
-            return {'text': '', 'confidence': 0.0}
+            return {'text': '', 'confidence': None}
         self._load_model()
         result = self._model.transcribe(audio_file)
         return {
             'text': result.get('text', ''),
-            'confidence': 1.0,  # Whisper does not expose per-segment confidence
+            'confidence': None,  # Whisper does not expose an overall confidence
         }
 
     def transcribe_with_timestamps(self, audio_file):

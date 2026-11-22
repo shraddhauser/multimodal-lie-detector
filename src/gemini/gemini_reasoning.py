@@ -8,8 +8,8 @@ gracefully: generate_summary() returns None and the report omits the
 AI summary.
 """
 
-import os
 import json
+import os
 
 try:
     import google.generativeai as genai
@@ -78,11 +78,23 @@ class GeminiReasoning:
             f"Report:\n{report_json}"
         )
 
-    def generate_report(self, multimodal_analysis, deviation_report):
-        """Generate detailed analysis report using Gemini."""
-        summary = self.generate_summary(deviation_report)
+    def generate_report(self, analysis_meta, deviation_report):
+        """
+        Assemble the final report.
+
+        Args:
+            analysis_meta: dict of pipeline metadata (durations, window counts...).
+            deviation_report: dict returned by MultimodalFusion.compute_deviation().
+        """
+        summary = None
+        if deviation_report.get('available_signals'):
+            try:
+                summary = self.generate_summary(deviation_report)
+            except Exception:
+                summary = None  # network/API errors must not break the report
         return {
             'title': 'Multimodal Behavioral-Signal Analysis Report',
+            'analysis': analysis_meta or {},
             'deviation_report': deviation_report,
             'ai_summary': summary,
             'caveat': CAVEAT,
