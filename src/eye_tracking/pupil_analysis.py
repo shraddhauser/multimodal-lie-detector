@@ -1,49 +1,52 @@
 """
-Pupil Analysis Module
-Analyzes pupil dilation and other pupil-related features.
+Pupil / Head-Movement Analysis Module
+Analyses head-movement variance from face-mesh nose-tip landmark.
 """
+
+import os
+import sys
 
 import numpy as np
 
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+
 
 class PupilAnalyzer:
-    """Analyze pupil characteristics for deception detection."""
-    
+    """
+    Analyse head movement using the nose-tip landmark (index 1 in
+    MediaPipe Face Mesh).  Pupil-dilation estimation from a webcam is
+    unreliable (lighting confound), so this module focuses on
+    head-movement variance as a proxy for restlessness.
+    """
+
+    NOSE_TIP_IDX = 1
+
     def __init__(self):
-        """Initialize the pupil analyzer."""
-        self.baseline_diameter = None
-    
-    def detect_pupils(self, eye_frame):
+        pass
+
+    def head_movement_variance(self, landmarks_sequence):
         """
-        Detect pupil location and size.
-        
+        Compute variance of the nose-tip position across frames.
+
         Args:
-            eye_frame: Cropped eye region
-            
+            landmarks_sequence: list of (478, 2) arrays.
+
         Returns:
-            Dictionary with pupil coordinates and diameter
+            dict with 'x_variance', 'y_variance', 'total_variance'.
         """
-        pupil_info = {
-            'x': 0.0,
-            'y': 0.0,
-            'diameter': 0.0
+        if not landmarks_sequence:
+            return {'x_variance': 0.0, 'y_variance': 0.0, 'total_variance': 0.0}
+
+        positions = np.array([lm[self.NOSE_TIP_IDX] for lm in landmarks_sequence])
+        x_var = float(np.var(positions[:, 0]))
+        y_var = float(np.var(positions[:, 1]))
+        return {
+            'x_variance': round(x_var, 4),
+            'y_variance': round(y_var, 4),
+            'total_variance': round(x_var + y_var, 4),
         }
-        return pupil_info
-    
-    def measure_dilation(self, pupil_sequence):
-        """Measure pupil dilation over time."""
-        dilation_rate = 0.0
-        return dilation_rate
-    
-    def analyze_pupil_patterns(self, pupil_data):
-        """Analyze patterns in pupil behavior."""
-        patterns = {
-            'average_dilation': 0.0,
-            'dilation_response_time': 0.0,
-            'fluctuations': []
-        }
-        return patterns
 
 
 if __name__ == "__main__":
-    print("Pupil Analyzer Module Loaded")
+    print("Pupil / Head-Movement Analyzer Module Loaded")

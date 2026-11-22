@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Don Not Lie - I'll predict it</title>
+    <title>Multimodal Behavioral-Signal Analysis</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 </head>
@@ -13,7 +13,7 @@
         <div class="container">
             <div class="logo">
                 <span class="logo-icon">🔍</span>
-                <span class="logo-text">Don Not Lie</span>
+                <span class="logo-text">Multimodal Signal Analysis</span>
             </div>
             <ul class="nav-links">
                 <li><a href="/" class="active">Home</a></li>
@@ -26,8 +26,8 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Don Not Lie</h1>
-            <p>I'll predict it</p>
+            <h1>Multimodal Behavioral Analysis</h1>
+            <p>A research prototype that measures how blink rate, gaze, head movement and voice change relative to a speaker's own baseline. It does not detect lies.</p>
             <a href="/upload" class="btn btn-large">Begin Analysis</a>
         </div>
     </section>
@@ -40,22 +40,22 @@
                 <div class="feature-card">
                     <div class="feature-icon">😊</div>
                     <h3>Facial Analysis</h3>
-                    <p>Detects micro-expressions and subtle facial cues that may indicate behavioral inconsistencies</p>
+                    <p>MediaPipe Face Mesh landmarks give blink rate (eye aspect ratio) and head-movement variance</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">👁️</div>
                     <h3>Eye Tracking</h3>
-                    <p>Monitors gaze patterns, pupil dilation, and eye movement to assess cognitive load and attention</p>
+                    <p>Iris position relative to the eye corners gives a gaze-aversion ratio</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🎙️</div>
                     <h3>Audio Analysis</h3>
-                    <p>Analyzes speech patterns, tone, emotion, and acoustic characteristics for consistency</p>
+                    <p>librosa measures pitch, jitter, shimmer, speech rate and pause ratio</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🧠</div>
-                    <h3>AI Reasoning</h3>
-                    <p>Uses advanced machine learning to synthesize multimodal data for comprehensive analysis</p>
+                    <h3>Baseline fusion</h3>
+                    <p>Each signal becomes a z-score against the speaker's first 20 seconds; Gemini can optionally summarise the result</p>
                 </div>
             </div>
         </div>
@@ -74,17 +74,17 @@
                 <div class="step">
                     <div class="step-number">2</div>
                     <h3>Process</h3>
-                    <p>System analyzes behavioral signals</p>
+                    <p>Signals are extracted in 5-second windows</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
-                    <h3>Analyze</h3>
-                    <p>AI synthesizes multimodal data</p>
+                    <h3>Compare</h3>
+                    <p>Later windows are compared to the speaker's own baseline</p>
                 </div>
                 <div class="step">
                     <div class="step-number">4</div>
                     <h3>Report</h3>
-                    <p>Get comprehensive analysis report</p>
+                    <p>See per-signal deviations; uploads are deleted after analysis</p>
                 </div>
             </div>
         </div>
@@ -94,7 +94,7 @@
     <section class="cta">
         <div class="container">
             <h2>Ready to Analyze?</h2>
-            <p>Upload your first video or audio file to experience advanced behavioral analysis</p>
+            <p>Use a recording of yourself, or one made with the speaker's consent, at least 30 seconds long</p>
             <a href="/upload" class="btn btn-large">Get Started</a>
         </div>
     </section>
@@ -102,7 +102,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Don Not Lie. All rights reserved.</p>
+            <p>Research prototype &middot; 3rd Prize, GDG TechSprint &middot; MIT License &middot; Not for hiring, policing, legal or other high-stakes decisions.</p>
             <p>For research and analytical purposes only.</p>
         </div>
     </footer>

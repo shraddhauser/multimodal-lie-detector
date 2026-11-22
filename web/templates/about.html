@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - Don Not Lie - I'll predict it</title>
+    <title>About - Multimodal Signal Analysis</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
 </head>
@@ -13,7 +13,7 @@
         <div class="container">
             <div class="logo">
                 <span class="logo-icon">🔍</span>
-                <span class="logo-text">Don Not Lie</span>
+                <span class="logo-text">Multimodal Signal Analysis</span>
             </div>
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
@@ -26,18 +26,20 @@
     <!-- Main Content -->
     <main class="about-container">
         <div class="container">
-            <h1>About Don Not Lie</h1>
+            <h1>About this project</h1>
 
             <!-- Overview Section -->
             <section class="about-section">
                 <h2>Project Overview</h2>
                 <p>
-                    The Multimodal Lie Detector is an advanced AI-powered behavioral analysis system that combines 
-                    multiple modalities to assess behavioral consistency and detect potential deception indicators.
+                    This is a behavioral-signal analysis prototype built for GDG TechSprint (3rd Prize). It measures
+                    how a speaker's blink rate, gaze, head movement and voice change relative to their own baseline.
+                    It produces a signal-consistency report, not a lie/truth verdict.
                 </p>
                 <p>
-                    Instead of relying on a single modality, our system synthesizes insights from facial expressions, 
-                    eye movements, speech patterns, and acoustic characteristics to provide a comprehensive analysis.
+                    The first 20 seconds of a recording are treated as the speaker's baseline. Every later 5-second
+                    window is compared against it, and each signal is expressed as a z-score against the baseline's
+                    own spread.
                 </p>
             </section>
 
@@ -49,24 +51,24 @@
                         <h3>Computer Vision</h3>
                         <ul>
                             <li>OpenCV</li>
-                            <li>Vision Transformers</li>
-                            <li>Facial Recognition</li>
+                            <li>MediaPipe Face Mesh</li>
+                            <li>Eye aspect ratio (blinks)</li>
                         </ul>
                     </div>
                     <div class="tech-card">
                         <h3>Audio Processing</h3>
                         <ul>
-                            <li>Whisper ASR</li>
-                            <li>Librosa</li>
-                            <li>Emotion Detection</li>
+                            <li>librosa (pyin pitch)</li>
+                            <li>Jitter / shimmer / pauses</li>
+                            <li>Whisper ASR (optional)</li>
                         </ul>
                     </div>
                     <div class="tech-card">
-                        <h3>AI & ML</h3>
+                        <h3>Fusion &amp; reasoning</h3>
                         <ul>
-                            <li>TensorFlow</li>
-                            <li>PyTorch</li>
-                            <li>Google Gemini</li>
+                            <li>Per-speaker baseline z-scores</li>
+                            <li>NumPy</li>
+                            <li>Google Gemini (optional)</li>
                         </ul>
                     </div>
                     <div class="tech-card">
@@ -92,37 +94,37 @@
                     <div class="step">
                         <div class="step-circle">2</div>
                         <h3>Face Detection</h3>
-                        <p>Identify and track facial features and expressions</p>
+                        <p>Find 478 face landmarks per frame</p>
                     </div>
                     <div class="step">
                         <div class="step-circle">3</div>
                         <h3>Eye Tracking</h3>
-                        <p>Monitor gaze patterns and pupil characteristics</p>
+                        <p>Blink rate and gaze-aversion ratio</p>
                     </div>
                     <div class="step">
                         <div class="step-circle">4</div>
                         <h3>Audio Analysis</h3>
-                        <p>Transcribe and analyze speech patterns and emotions</p>
+                        <p>Pitch, jitter, shimmer, speech rate, pauses</p>
                     </div>
                     <div class="step">
                         <div class="step-circle">5</div>
-                        <h3>Feature Extraction</h3>
-                        <p>Extract acoustic and behavioral features</p>
+                        <h3>Baseline</h3>
+                        <p>First 20 s, split into 5 s windows</p>
                     </div>
                     <div class="step">
                         <div class="step-circle">6</div>
                         <h3>Multimodal Fusion</h3>
-                        <p>Combine features from all modalities</p>
+                        <p>Per-signal z-scores and a deviation index</p>
                     </div>
                     <div class="step">
                         <div class="step-circle">7</div>
-                        <h3>AI Analysis</h3>
-                        <p>Apply machine learning models for assessment</p>
+                        <h3>AI summary</h3>
+                        <p>Optional plain-English summary from Gemini</p>
                     </div>
                     <div class="step">
                         <div class="step-circle">8</div>
                         <h3>Report Generation</h3>
-                        <p>Create comprehensive analysis report</p>
+                        <p>Signal-consistency report, uploads deleted</p>
                     </div>
                 </div>
             </section>
@@ -132,28 +134,28 @@
                 <h2>Key Features</h2>
                 <div class="features-list">
                     <div class="feature">
-                        <h3>👁️ Advanced Face Analysis</h3>
-                        <p>Detects micro-expressions, face movements, and subtle facial cues that may indicate deception</p>
+                        <h3>👁️ Face signals</h3>
+                        <p>Blink rate and head-movement variance from MediaPipe Face Mesh landmarks</p>
                     </div>
                     <div class="feature">
-                        <h3>🔍 Eye Movement Tracking</h3>
-                        <p>Monitors gaze patterns, pupil dilation, blink rates, and fixation duration</p>
+                        <h3>🔍 Gaze</h3>
+                        <p>Fraction of frames where the iris sits away from the centre of the eye</p>
                     </div>
                     <div class="feature">
                         <h3>🎵 Audio Pattern Analysis</h3>
-                        <p>Analyzes pitch variations, speech rate, pauses, and emotional tone</p>
+                        <p>Pitch mean and variability, jitter, shimmer, speech rate and pause ratio</p>
                     </div>
                     <div class="feature">
                         <h3>🧠 AI-Powered Reasoning</h3>
-                        <p>Uses Google Gemini for advanced multi-step reasoning on multimodal data</p>
+                        <p>Optional: Gemini turns the numbers into a plain-English summary that always carries the ethics caveat</p>
                     </div>
                     <div class="feature">
                         <h3>📊 Comprehensive Reporting</h3>
-                        <p>Generates detailed analysis reports with visualizations and recommendations</p>
+                        <p>Per-signal table and chart, downloadable as JSON</p>
                     </div>
                     <div class="feature">
                         <h3>🔐 Privacy Focused</h3>
-                        <p>Secure processing with automatic deletion of uploaded files after analysis</p>
+                        <p>Uploads are deleted right after analysis (and after 30 minutes if never analysed); reports stay in your browser tab only</p>
                     </div>
                 </div>
             </section>
@@ -162,13 +164,13 @@
             <section class="about-section disclaimer">
                 <h2>Important Disclaimer</h2>
                 <p>
-                    This system is designed for <strong>research and analytical purposes only</strong>. 
-                    The analysis results should not be used as the sole basis for critical decisions. 
-                    Behavioral analysis is complex and influenced by many factors.
+                    There is <strong>no scientifically validated physiological or behavioral "lie signature"</strong>.
+                    This prototype measures change from a baseline, which can come from stress, cognitive load,
+                    culture, neurodivergence, anxiety or recording conditions.
                 </p>
                 <p>
-                    Results should be interpreted by qualified professionals in conjunction with 
-                    other evidence and investigative methods.
+                    Do not use it for hiring, policing, legal proceedings or any other high-stakes decision.
+                    Only analyse recordings made with the speaker's consent.
                 </p>
             </section>
 
@@ -186,7 +188,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Don Not Lie. All rights reserved.</p>
+            <p>Research prototype &middot; 3rd Prize, GDG TechSprint &middot; MIT License &middot; Not for hiring, policing, legal or other high-stakes decisions.</p>
         </div>
     </footer>
 </body>

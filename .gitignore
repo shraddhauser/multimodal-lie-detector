@@ -66,16 +66,33 @@ venv.bak/
 *.pth
 *.onnx
 
-# Data files
-data/raw/*
-data/processed/*
-!.gitkeep
+# Data, recordings and generated reports (never commit real media)
+data/
+reports/
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.wav
+*.mp3
+*.m4a
 
-# Reports
-reports/outputs/*
-reports/screenshots/*
-!.gitkeep
+# Test / tool caches
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# AI-agent working files
+AGENTS.md
+PROMPT_*.txt
+.planning/
 
 # OS
 .DS_Store
 Thumbs.db
+
+# Uploads (never commit user uploads)
+web/uploads/*
+!web/uploads/.gitkeep

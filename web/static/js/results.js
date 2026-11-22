@@ -1,181 +1,167 @@
 /* ============================================
    Results Page JavaScript
+   Renders the report returned by POST /api/analyze.
+   Nothing on this page is hard-coded: every number comes from the API
+   response, which upload.js stores in sessionStorage.
    ============================================ */
 
-document.addEventListener('DOMContentLoaded', function() {
-    loadResults();
-    initializeChart();
-});
+const SIGNAL_LABELS = {
+    blinks_per_minute: 'Blink rate (blinks/min)',
+    aversion_ratio: 'Gaze-aversion ratio',
+    head_movement_variance: 'Head-movement variance (px²)',
+    pitch_mean: 'Pitch mean (Hz)',
+    pitch_std: 'Pitch variability (Hz)',
+    speech_rate: 'Speech rate (onsets/s)',
+    pause_ratio: 'Pause ratio',
+};
 
-function loadResults() {
-    // Simulate loading results (in production, fetch from server)
-    const mockResults = {
-        deception_score: 0.65,
-        assessment: 'Moderate indicators of potential inconsistency detected',
-        facial_analysis: {
-            micro_expressions: 'Detected 3 inconsistencies',
-            expression_consistency: '78%',
-            detected_emotions: 'Neutral, slight concern'
-        },
-        eye_tracking: {
-            gaze_pattern: 'Avoidance noted',
-            pupil_dilation: '+12% increase',
-            blink_rate: 'Elevated (25 blinks/min)'
-        },
-        audio_analysis: {
-            speech_emotion: 'Anxiety detected',
-            pitch_variation: '+8% higher variance',
-            pause_patterns: 'Longer hesitation pauses'
-        },
-        behavioral_consistency: {
-            multimodal_alignment: '72%',
-            cognitive_load: 'High',
-            behavioral_score: 6.8
-        },
-        evidence: [
-            'Eye contact avoidance during specific questions',
-            'Micro-expressions conflicting with spoken content',
-            'Increased vocal pitch and speech rate',
-            'Elevated pupil dilation response',
-            'Increased pause duration before responses'
-        ],
-        recommendations: [
-            'Further investigation recommended',
-            'Consult with behavioral experts',
-            'Review context and baseline behavior',
-            'Consider environmental factors'
-        ]
-    };
+let currentReport = null;
 
-    // Update score
-    document.getElementById('scoreValue').textContent = (mockResults.deception_score * 100).toFixed(0) + '%';
-    document.getElementById('overallAssessment').textContent = mockResults.assessment;
-
-    // Update facial analysis
-    document.getElementById('microExpressions').textContent = mockResults.facial_analysis.micro_expressions;
-    document.getElementById('expressionConsistency').textContent = mockResults.facial_analysis.expression_consistency;
-    document.getElementById('detectedEmotions').textContent = mockResults.facial_analysis.detected_emotions;
-
-    // Update eye tracking
-    document.getElementById('gazePattern').textContent = mockResults.eye_tracking.gaze_pattern;
-    document.getElementById('pupilDilation').textContent = mockResults.eye_tracking.pupil_dilation;
-    document.getElementById('blinkRate').textContent = mockResults.eye_tracking.blink_rate;
-
-    // Update audio analysis
-    document.getElementById('speechEmotion').textContent = mockResults.audio_analysis.speech_emotion;
-    document.getElementById('pitchVariation').textContent = mockResults.audio_analysis.pitch_variation;
-    document.getElementById('pausePatterns').textContent = mockResults.audio_analysis.pause_patterns;
-
-    // Update behavioral consistency
-    document.getElementById('multimodalAlignment').textContent = mockResults.behavioral_consistency.multimodal_alignment;
-    document.getElementById('cognitiveLoad').textContent = mockResults.behavioral_consistency.cognitive_load;
-    document.getElementById('behavioralScore').textContent = mockResults.behavioral_consistency.behavioral_score;
-
-    // Update evidence
-    const evidenceList = document.getElementById('evidenceList');
-    evidenceList.innerHTML = mockResults.evidence.map(e => 
-        `<div class="evidence-item"><strong>▸</strong> ${e}</div>`
-    ).join('');
-
-    // Update recommendations
-    const recList = document.getElementById('recommendationsList');
-    recList.innerHTML = mockResults.recommendations.map(r => 
-        `<div class="recommendation-item"><strong>▸</strong> ${r}</div>`
-    ).join('');
-}
-
-function initializeChart() {
-    const ctx = document.getElementById('timelineChart');
-    if (!ctx) return;
-
-    // Read theme colors from CSS variables
-    const css = getComputedStyle(document.documentElement);
-    const primary = css.getPropertyValue('--primary-color').trim() || '#6366f1';
-    const primaryDark = css.getPropertyValue('--primary-dark').trim() || '#4f46e5';
-    const secondary = css.getPropertyValue('--secondary-color').trim() || '#10b981';
-
-    function hexToRgba(hex, alpha) {
-        if (!hex) return `rgba(255,255,255,${alpha})`;
-        const h = hex.replace('#', '').trim();
-        const bigint = parseInt(h.length === 3 ? h.split('').map(c=>c+c).join('') : h, 16);
-        const r = (bigint >> 16) & 255;
-        const g = (bigint >> 8) & 255;
-        const b = bigint & 255;
-        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+document.addEventListener('DOMContentLoaded', function () {
+    let stored = null;
+    try {
+        stored = JSON.parse(sessionStorage.getItem('analysisResult') || 'null');
+    } catch (e) {
+        stored = null;
     }
 
+    if (!stored || !stored.result) {
+        document.getElementById('emptyState').style.display = 'block';
+        return;
+    }
+
+    currentReport = stored;
+    renderReport(stored.result);
+});
+
+function fmt(value, digits = 2) {
+    if (value === null || value === undefined || Number.isNaN(value)) return '—';
+    return Number(value).toFixed(digits);
+}
+
+function renderReport(report) {
+    const dev = report.deviation_report || {};
+    const meta = report.analysis || {};
+
+    document.getElementById('reportBody').style.display = 'block';
+    if (report.caveat) {
+        document.getElementById('caveatText').textContent = report.caveat;
+    }
+
+    document.getElementById('deviationIndex').textContent = fmt(dev.deviation_index);
+    document.getElementById('explanation').textContent = dev.explanation || '';
+    document.getElementById('aiSummary').textContent =
+        report.ai_summary || 'No AI summary (GEMINI_API_KEY not set, or no signals to summarise).';
+
+    renderSignalTable(dev);
+    renderChart(dev);
+    renderMeta(meta);
+}
+
+function renderSignalTable(dev) {
+    const tbody = document.getElementById('signalRows');
+    tbody.textContent = '';
+    const signals = dev.available_signals || [];
+
+    if (signals.length === 0) {
+        const row = tbody.insertRow();
+        const cell = row.insertCell();
+        cell.colSpan = 5;
+        cell.textContent = 'No signals could be compared. The video may be shorter than the baseline period, have no detectable face, or have no decodable audio.';
+        return;
+    }
+
+    signals.forEach((key) => {
+        const row = tbody.insertRow();
+        const method = (dev.methods || {})[key];
+        [
+            SIGNAL_LABELS[key] || key,
+            fmt((dev.baseline_values || {})[key], 3),
+            fmt((dev.segment_values || {})[key], 3),
+            method === 'z_score' ? 'z = ' + fmt(dev.per_signal[key]) : fmt(dev.per_signal[key] * 100, 0) + ' %',
+            method === 'z_score' ? 'z-score' : 'relative change',
+        ].forEach((text) => {
+            row.insertCell().textContent = text;
+        });
+    });
+}
+
+function renderChart(dev) {
+    const ctx = document.getElementById('signalChart');
+    const signals = dev.available_signals || [];
+    if (!ctx || typeof Chart === 'undefined' || signals.length === 0) return;
+
+    // Theme colors come from the CSS variables in style.css
+    const css = getComputedStyle(document.documentElement);
+    const themeColor = (name, fallback) => css.getPropertyValue(name).trim() || fallback;
+    const positive = themeColor('--primary-color', '#FF4655');
+    const negative = themeColor('--text-secondary', '#BFC3C7');
+    const grid = themeColor('--surface-light', '#1a1a1a');
+    const text = themeColor('--text-secondary', '#BFC3C7');
+
+    const values = signals.map((k) => dev.per_signal[k]);
     new Chart(ctx, {
-        type: 'line',
+        type: 'bar',
         data: {
-            labels: ['0s', '10s', '20s', '30s', '40s', '50s', '60s'],
-            datasets: [
-                {
-                    label: 'Deception Score',
-                    data: [0.3, 0.4, 0.65, 0.7, 0.65, 0.6, 0.55],
-                    borderColor: primary,
-                    backgroundColor: hexToRgba(primary, 0.12),
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.4
-                },
-                {
-                    label: 'Cognitive Load',
-                    data: [0.4, 0.5, 0.75, 0.8, 0.7, 0.6, 0.5],
-                    borderColor: primaryDark,
-                    backgroundColor: hexToRgba(primaryDark, 0.12),
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.4
-                },
-                {
-                    label: 'Consistency Score',
-                    data: [0.8, 0.75, 0.65, 0.6, 0.65, 0.7, 0.75],
-                    borderColor: secondary,
-                    backgroundColor: hexToRgba(secondary, 0.12),
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.4
-                }
-            ]
+            labels: signals.map((k) => SIGNAL_LABELS[k] || k),
+            datasets: [{
+                label: 'Deviation from baseline',
+                data: values,
+                backgroundColor: values.map((v) => (v >= 0 ? positive : negative)),
+                borderWidth: 0,
+            }],
         },
         options: {
+            indexAxis: 'y',
             responsive: true,
             maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: true,
-                    labels: {
-                        color: css.getPropertyValue('--text-secondary').trim() || '#cbd5e1'
-                    }
-                }
-            },
+            plugins: { legend: { display: false } },
             scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 1,
-                    grid: {
-                        color: css.getPropertyValue('--surface-light').trim() || '#334155'
-                    },
-                    ticks: {
-                        color: css.getPropertyValue('--text-secondary').trim() || '#cbd5e1'
-                    }
-                },
-                x: {
-                    grid: {
-                        color: css.getPropertyValue('--surface-light').trim() || '#334155'
-                    },
-                    ticks: {
-                        color: css.getPropertyValue('--text-secondary').trim() || '#cbd5e1'
-                    }
-                }
-            }
-        }
+                x: { grid: { color: grid }, ticks: { color: text } },
+                y: { grid: { color: grid }, ticks: { color: text } },
+            },
+        },
+    });
+}
+
+function renderMeta(meta) {
+    const box = document.getElementById('analysisMeta');
+    box.textContent = '';
+    const rows = [
+        ['Video duration (s)', fmt(meta.video_duration_s, 1)],
+        ['Frames with a face / total', `${meta.frames_with_face ?? '—'} / ${meta.total_frames ?? '—'}`],
+        ['Baseline period (s)', meta.baseline_seconds ?? '—'],
+        ['Window length (s)', meta.window_seconds ?? '—'],
+        ['Baseline windows (face / audio)', meta.baseline_windows ? `${meta.baseline_windows.face} / ${meta.baseline_windows.audio}` : '—'],
+        ['Compared windows (face / audio)', meta.segment_windows ? `${meta.segment_windows.face} / ${meta.segment_windows.audio}` : '—'],
+        ['Audio source', meta.audio_source || 'none'],
+        ['Face landmarks', meta.face_landmarks_backend || '—'],
+    ];
+    if (meta.transcript) rows.push(['Transcript', meta.transcript]);
+
+    rows.forEach(([label, value]) => {
+        const item = document.createElement('div');
+        item.className = 'result-item';
+        const l = document.createElement('span');
+        l.className = 'label';
+        l.textContent = label;
+        const v = document.createElement('span');
+        v.className = 'value';
+        v.textContent = String(value);
+        item.append(l, v);
+        box.appendChild(item);
     });
 }
 
 function downloadReport() {
-    alert('Report download feature coming soon!');
-    // TODO: Implement report generation and download
+    if (!currentReport) return;
+    const blob = new Blob([JSON.stringify(currentReport, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'signal-report.json';
+    a.click();
+    URL.revokeObjectURL(url);
 }
 
 function startNewAnalysis() {

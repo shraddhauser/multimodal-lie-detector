@@ -5,6 +5,15 @@
 let videoFile = null;
 let audioFile = null;
 
+// Must match ALLOWED_*_EXTENSIONS in web/app.py
+const VIDEO_EXTENSIONS = ['mp4', 'avi', 'mov', 'mkv', 'flv', 'wmv'];
+const AUDIO_EXTENSIONS = ['mp3', 'wav', 'm4a', 'flac', 'aac'];
+
+function fileExtension(name) {
+    const i = name.lastIndexOf('.');
+    return i >= 0 ? name.slice(i + 1).toLowerCase() : '';
+}
+
 // Initialize drag and drop
 document.addEventListener('DOMContentLoaded', function() {
     const videoArea = document.getElementById('videoUploadArea');
@@ -56,8 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function handleVideoSelect(file) {
     if (!file) return;
 
-    if (!['video/mp4', 'video/avi', 'video/quicktime', 'video/x-matroska', 
-          'video/x-flv', 'video/x-ms-wmv'].includes(file.type)) {
+    if (!VIDEO_EXTENSIONS.includes(fileExtension(file.name))) {
         showError('Invalid video format. Please select a valid video file.');
         return;
     }
@@ -76,7 +84,7 @@ function handleVideoSelect(file) {
 function handleAudioSelect(file) {
     if (!file) return;
 
-    if (!['audio/mpeg', 'audio/wav', 'audio/mp4', 'audio/flac', 'audio/aac'].includes(file.type)) {
+    if (!AUDIO_EXTENSIONS.includes(fileExtension(file.name))) {
         showError('Invalid audio format. Please select a valid audio file.');
         return;
     }
@@ -151,15 +159,14 @@ async function startAnalysis() {
             body: videoFormData
         });
 
-        if (!videoResponse.ok) {
-            throw new Error('Video upload failed');
-        }
-
         const videoData = await videoResponse.json();
+        if (!videoResponse.ok) {
+            throw new Error(videoData.error || 'Video upload failed');
+        }
         updateProgress(33, 'Processing video...');
 
         // Upload audio if exists
-        let audioPath = null;
+        let audioUploadId = null;
         if (audioFile) {
             const audioFormData = new FormData();
             audioFormData.append('file', audioFile);
@@ -169,30 +176,34 @@ async function startAnalysis() {
                 method: 'POST',
                 body: audioFormData
             });
-
-            if (audioResponse.ok) {
-                const audioData = await audioResponse.json();
-                audioPath = audioData.filepath;
+            const audioData = await audioResponse.json();
+            if (!audioResponse.ok) {
+                throw new Error(audioData.error || 'Audio upload failed');
             }
+            audioUploadId = audioData.upload_id;
         }
 
         updateProgress(66, 'Analyzing multimodal data...');
 
-        // Start analysis
+        // Start analysis (the server only accepts upload IDs, never paths)
         const analysisResponse = await fetch('/api/analyze', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                video_file: videoData.filepath,
-                audio_file: audioPath
+                video_upload_id: videoData.upload_id,
+                audio_upload_id: audioUploadId
             })
         });
 
+        const analysisData = await analysisResponse.json();
         if (!analysisResponse.ok) {
-            throw new Error('Analysis failed');
+            throw new Error(analysisData.error || 'Analysis failed');
         }
+
+        // Keep the report only in this tab; nothing is stored server-side
+        sessionStorage.setItem('analysisResult', JSON.stringify(analysisData));
 
         updateProgress(100, 'Analysis complete!');
 
