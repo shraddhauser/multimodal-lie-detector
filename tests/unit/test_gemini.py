@@ -3,14 +3,10 @@ Unit tests for Gemini reasoning module.
 Tests use mocking — no API key or internet required.
 """
 
-import sys
 import os
-import pytest
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
-
-from gemini.gemini_reasoning import GeminiReasoning, CAVEAT
+from gemini.gemini_reasoning import CAVEAT, GeminiReasoning
 
 
 class TestGeminiReasoning:
@@ -18,8 +14,7 @@ class TestGeminiReasoning:
 
     def test_no_api_key_graceful(self):
         """Without an API key, generate_summary should return None."""
-        reasoning = GeminiReasoning(api_key=None)
-        # Also clear the env var
+        # Clear the env var so no key can leak in from the developer's machine
         with patch.dict(os.environ, {}, clear=True):
             reasoning_clean = GeminiReasoning(api_key=None)
             result = reasoning_clean.generate_summary({'deviation_index': 0.5})
@@ -30,9 +25,7 @@ class TestGeminiReasoning:
         reasoning = GeminiReasoning(api_key='fake-key')
         report = {'deviation_index': 0.5, 'per_signal': {'pitch_mean': 1.2}}
         prompt = reasoning._build_prompt(report)
-        assert 'no scientifically validated' in prompt.lower() or \
-               'no reliable physiological' in prompt.lower() or \
-               CAVEAT[:30] in prompt
+        assert CAVEAT in prompt
 
     @patch('gemini.gemini_reasoning.GENAI_AVAILABLE', True)
     def test_generate_summary_with_mock(self):
@@ -51,17 +44,23 @@ class TestGeminiReasoning:
         assert result == "This is a mocked summary with caveat."
         mock_model.generate_content.assert_called_once()
 
+    def test_api_error_degrades_gracefully(self):
+        """A Gemini/network error must not break the report; it just has no summary."""
+        reasoning = GeminiReasoning(api_key='fake-key')
+        reasoning._model = MagicMock()
+        reasoning._model.generate_content.side_effect = RuntimeError('network down')
+        report = reasoning.generate_report({}, {'deviation_index': 0.5, 'available_signals': ['pitch_mean']})
+        assert report['ai_summary'] is None
+        assert report['caveat'] == CAVEAT
+
     def test_report_structure(self):
         """generate_report should include the caveat even without API."""
-        reasoning = GeminiReasoning(api_key=None)
-        report = reasoning.generate_report(
-            {},
-            {'deviation_index': 0.3, 'per_signal': {}}
-        )
+        with patch.dict(os.environ, {}, clear=True):
+            reasoning = GeminiReasoning(api_key=None)
+            report = reasoning.generate_report(
+                {},
+                {'deviation_index': 0.3, 'per_signal': {}}
+            )
         assert 'caveat' in report
         assert report['ai_summary'] is None  # no key → no summary
         assert 'deviation_report' in report
-
-
-if __name__ == '__main__':
-    pytest.main([__file__, '-v'])

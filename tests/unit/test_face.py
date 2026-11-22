@@ -3,12 +3,8 @@ Unit tests for face analysis module.
 Uses synthetic landmarks and blank frames — no real images needed.
 """
 
-import sys
-import os
-import numpy as np
-import pytest
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+
 
 from face_analysis.face_detector import FaceDetector
 from face_analysis.micro_expression import MicroExpressionDetector
@@ -95,7 +91,3 @@ class TestBlinkCounter:
         assert result['blink_count'] == 3, (
             f"Expected 3 blinks, got {result['blink_count']}"
         )
-
-
-if __name__ == '__main__':
-    pytest.main([__file__, '-v'])
