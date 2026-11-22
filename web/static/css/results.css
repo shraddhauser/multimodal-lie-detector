@@ -211,3 +211,43 @@
         width: 100%;
     }
 }
+
+/* Report tables & caveat */
+.caveat-card {
+    border: 2px solid #f472b6;
+    background: rgba(244, 114, 182, 0.08);
+}
+
+.caveat-card p {
+    color: #f1f5f9;
+    line-height: 1.6;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+.signal-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #cbd5e1;
+}
+
+.signal-table th,
+.signal-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #475569;
+    white-space: nowrap;
+}
+
+.signal-table th {
+    color: #f1f5f9;
+}
+
+.explanation {
+    white-space: pre-wrap;
+    color: #cbd5e1;
+    font-family: inherit;
+    line-height: 1.6;
+}
