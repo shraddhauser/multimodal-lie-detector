@@ -3,10 +3,11 @@ Eye Tracking Module
 Tracks blink rate and gaze-aversion ratio from MediaPipe Face Mesh landmarks.
 """
 
+import os
+import sys
+
 import numpy as np
 
-import sys
-import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from face_analysis.face_detector import FaceDetector

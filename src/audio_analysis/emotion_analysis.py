@@ -8,7 +8,6 @@ distribution and is labeled as **simulated**.
 Label: simulated / placeholder.
 """
 
-import numpy as np
 
 
 class EmotionAnalyzer:
