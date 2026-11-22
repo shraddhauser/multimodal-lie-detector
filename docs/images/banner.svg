@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320" role="img" aria-label="Multimodal Signal Analysis: face, gaze and voice deviation from a speaker's own baseline">
+  <rect width="1280" height="320" fill="#0D1117"/>
+  <rect x="80" y="96" width="8" height="128" rx="4" fill="#F472B6"/>
+  <text x="120" y="160" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="60" font-weight="800" fill="#F0F6FC">Multimodal Signal Analysis</text>
+  <text x="122" y="212" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="26" fill="#8B949E">Face, gaze and voice deviation from a speaker's own baseline</text>
+  <g fill="none" stroke="#F472B6" stroke-width="3" stroke-linecap="round" opacity="0.9">
+    <polyline points="1010,190 1040,190 1055,140 1075,240 1095,120 1115,215 1130,175 1160,190 1200,190"/>
+  </g>
+  <circle cx="1200" cy="190" r="6" fill="#F472B6"/>
+</svg>
